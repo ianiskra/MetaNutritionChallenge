@@ -1,0 +1,25 @@
+{
+  "name": "metanutrition",
+  "version": "1.0.0",
+  "description": "Node Backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ianiskra/MetaNutritionChallenge.git"
+  },
+  "author": "Ian Iskra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ianiskra/MetaNutritionChallenge/issues"
+  },
+  "homepage": "https://github.com/ianiskra/MetaNutritionChallenge#readme",
+  "dependencies": {
+    "uuid": "^3.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
