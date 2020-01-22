@@ -40,8 +40,7 @@ const server = http.createServer((req, res) => {
     // }
 
     // Build File Path
-    let filePath = path.join(
-        __dirname, 
+    let filePath = path.join(__dirname, 
         'public', req.url === '/' ? 'index.html' : req.url );
 
     // Extension of file
@@ -74,21 +73,20 @@ const server = http.createServer((req, res) => {
     }
 
     // Read File
-    fs.readFile(filePath, (err, content) =>{
+    fs.readFile(filePath, (err, content) => {
         // Check for Error
         if(err){
-
-            // Error Code ENOENT
+            // Error Code ENOENT - Not Found
             if(err.code == 'ENOENT'){
                 // Page Not Found
-                fr.readFile(path.join(__dirname, 'public', '404.html'),
-                (err, content) => {
+                fs.readFile(path.join(__dirname, 'public', '404.html'), (err, content) => {
+                    // 200 response
                     res.writeHead(200, { 'Content-Type': 'text/html' });
                     res.end(content, 'utf8');
                 })
             }
 
-            // 500 Error
+            // 500 Error - Different Error
             else{
                 // Some Server Error
                 res.writeHead(500);
@@ -98,7 +96,8 @@ const server = http.createServer((req, res) => {
         // No Error
         else{
             // Successful Response
-            res.writeHead(200, { 'Content-Type': 'text/html' });
+            res.writeHead(200, { 'Content-Type': contentType });
+            // Loads Content
             res.end(content, 'utf8');
         }
     });
