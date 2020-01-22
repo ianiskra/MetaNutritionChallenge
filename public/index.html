@@ -8,9 +8,20 @@
 	<link rel="stylesheet" type="text/css" href="./css/styles.css" />
 </head>
 <body>
-	<h1>Welcome to the Homepage</h1>
-	<p>This is a sentence.</p>
-	<p>I created a branch called firstbranch.</p>
-	<p>Creating another commit</p>
+	<h1>San Fransisco Movie Locations Map</h1>
+
+	<div id="hello"></div>
+
+	<!-- Contains the maps implementation -->
+	<script src="./javascript/maps.js"></script>
+	
+	<!--Load the API from the specified URL
+	    * The async attribute allows the browser to render the page while the API loads
+	    * The key parameter will contain your own API key (which is not needed for this tutorial)
+	    * The callback parameter executes the initMap() function
+		-->
+		
+	<!-- Google Maps API Key for JavaScript -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADDvb3DJSN8Zvdf-XZQ_-HiT8YzlSY6Lc&callback=initMap" async defer></script>
 </body>
 </html>
