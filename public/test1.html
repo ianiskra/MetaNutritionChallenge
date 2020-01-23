@@ -41,7 +41,7 @@
                     position: uluru,
                     map: map
                 });
-                // codeAddress(address);
+                 codeAddress(address);
 
             }
 
@@ -49,17 +49,17 @@
 
                 geocoder.geocode({ 'address': address }, function (results, status) {
                     console.log(results);
-                    var latLng = { lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng() };
-                    console.log(latLng);
-                    if (status == 'OK') {
-                        var marker = new google.maps.Marker({
-                            position: latLng,
-                            map: map
-                        });
-                        console.log(map);
-                    } else {
-                        alert('Geocode was not successful for the following reason: ' + status);
-                    }
+                    // var latLng = { lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng() };
+                    // console.log(latLng);
+                    // if (status == 'OK') {
+                    //     var marker = new google.maps.Marker({
+                    //         position: latLng,
+                    //         map: map
+                    //     });
+                    //     console.log(map);
+                    // } else {
+                    //     alert('Geocode was not successful for the following reason: ' + status);
+                    // }
                 });
             }
     </script>
