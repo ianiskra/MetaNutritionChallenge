@@ -8,19 +8,20 @@
 	<link rel="stylesheet" type="text/css" href="./css/styles.css" />
 </head>
 <body>
+	<header id="head">
+		<p>Insert Nice UI Header Here</p>
+	</header>
+
 	<h1>San Fransisco Movie Locations Map</h1>
 
-	<!-- Running a JS Test -->
-	<div id="hello">
-
-	</div>
+	<p id="hello"></p>
 
 	<!-- Contains map and feature -->
-	<div id="map-container">
+	<main id="map-container">
 
 		<!-- Contain the Map App -->
 		<div id="map">
-
+			<h2>The Map Goes Here</h2>
 		</div>
 
 		<!-- Additional Feature -->
@@ -28,9 +29,9 @@
 
 		</div>
 
-	</div>
+	</main>
 
-	<!-- Contains the maps implementation -->
+	<!-- Contains the Map implementation -->
 	<script src="./javascript/maps.js"></script>
 	
 	<!--Load the API from the specified URL
@@ -40,6 +41,6 @@
 		-->
 		
 	<!-- Google Maps API Key for JavaScript -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADDvb3DJSN8Zvdf-XZQ_-HiT8YzlSY6Lc&callback=initMap" async defer></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADDvb3DJSN8Zvdf-XZQ_-HiT8YzlSY6Lc&callback=initMap"></script>
 </body>
 </html>
