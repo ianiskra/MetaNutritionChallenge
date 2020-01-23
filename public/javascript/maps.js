@@ -1,4 +1,4 @@
-/* Objecttive: Create a service that shows on a map where movies have been filmed in San Francisco. 
+/* Objective: Create a service that shows on a map where movies have been filmed in San Francisco. 
  * The user should be able to filter the view using autocompletion search. The data is available 
  * on the Film_Locations_in_San_Francisco.csv
  * 
@@ -8,13 +8,7 @@
  * 
 */
 
-// Fields
-// const csv = require('csv-parser');
-// const createCsvWriter = require('csv-writer').createArrayCsvWriter;
-// const fs = require('fs');
 
-// Need to Properly Display JS outpus back to HTML page
-// document.getElementById("hello") = "Hello World!";
 
 // 1. Create JSON variables holding key-pair values on Locations
     // Utilize Values titles and locations from the .csv file
@@ -39,5 +33,32 @@ function initMap() {
         // 4. Use zoom property so map is centered at SF
         document.getElementById('map'),
         { zoom: 13, center: sanFran});
+
+}
+
+function doSearch() {
+    let search = document.getElementById('filmTitle').value;
+    console.log(search);
+
+    var xmlhttp = new XMLHttpRequest();
+    var url = "find.data?filmTitle=" + search;
+        
+    xmlhttp.onreadystatechange = function() {
+    
+        if (this.readyState == 4 && this.status == 200) {
+            var myArr = JSON.parse(this.responseText);
+            console.log(myArr);
+
+            for(let i = 0; i < myArr.length; i++){
+                let location = myArr[i];
+                console.log(location);
+
+                // Put Pin on Map at Location
+                
+            }
+        }
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
 
 }

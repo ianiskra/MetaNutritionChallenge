@@ -49,8 +49,9 @@ const server = http.createServer((req, res) => {
     // Initial Content
     let contentType = 'text/html';
 
-    // Check ext and set content type
+    // Server Check ext and set content type
     switch(extname) {
+        
         case '.js': 
             contentType = 'text/javascript';
             break;
@@ -70,9 +71,34 @@ const server = http.createServer((req, res) => {
         case '.jpg':
             contentType = 'image/jpg';
             break;
+        
+        default :
+
+        if(extname.substring(0,6) == '.data?'){
+            // Express 3 Version
+            // let output = req.param("filmTitle");
+            let query = extname.substring(6);
+            
+            // Spliting filmTitle
+            let parts = query.split('=');
+            let filmTitle = parts[1];
+            // Get list of locations from .csv file
+            let locations = [];
+            // File Loader
+            locations = ['Epic Roasthouse(399 Embarcadero)', 'Mason & California Streets(Nob Hill)', 'Justin Herman Plaza'];
+
+            // 
+
+
+            let output = {"data" : locations };
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            res.end(JSON.stringify(output), 'utf8');
+            return;
+        }
     }
 
-    // Read File
+
+    // Read File - Delivers files to Front End based on URL requests
     fs.readFile(filePath, (err, content) => {
         // Check for Error
         if(err){
