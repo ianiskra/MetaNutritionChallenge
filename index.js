@@ -1,6 +1,31 @@
+/* Index.js Serves as the Server and handles routing */
+
 const http = require('http');
 const path = require('path');
 const fs = require('fs');
+
+const csv = require('csv-parser');
+let films = [];
+let filmNames = new Set();
+
+// Read the csv file
+fs.createReadStream('Film_Locations_in_San_Francisco.csv')
+    .pipe(csv())
+    .on('data', (row) => {
+        // console.log(row);
+        // Push row to films list
+        films.push(row);
+
+        // Will handle discard of repeats
+        filmNames.add(row['Title']);
+        
+    })
+    .on('end', () => {
+        console.log('CSV file successfully processed');
+        console.log(filmNames);
+    });
+
+
 
 const server = http.createServer((req, res) => {
 
@@ -74,6 +99,7 @@ const server = http.createServer((req, res) => {
         
         default :
 
+        // respond to data requests
         if(extname.substring(0,6) == '.data?'){
             // Express 3 Version
             // let output = req.param("filmTitle");
@@ -81,19 +107,49 @@ const server = http.createServer((req, res) => {
             
             // Spliting filmTitle
             let parts = query.split('=');
-            let filmTitle = parts[1];
-            // Get list of locations from .csv file
-            let locations = [];
-            // File Loader
-            locations = ['Epic Roasthouse(399 Embarcadero)', 'Mason & California Streets(Nob Hill)', 'Justin Herman Plaza'];
 
-            // 
+            if(parts[0] == 'filmTitle') {
 
+                let filmTitle = parts[1];
+                console.log(filmTitle);
 
-            let output = {"data" : locations };
-            res.writeHead(200, { 'Content-Type': 'text/html' });
-            res.end(JSON.stringify(output), 'utf8');
-            return;
+                // Films withs spaces
+                filmTitle = filmTitle.split('%20').join(' ');
+
+                // Get list of locations from .csv file
+                let locations = [];
+                
+                for(let i = 0; i < films.length; i++){
+
+                    let film = films[i];
+
+                    // title of film match search query
+                    if(film['Title'] == filmTitle){
+
+                        // add to it's film location
+                        locations.push(film['Locations']);
+                    }
+                }
+
+                // Reveals all locations of specified films
+                console.log(locations);
+
+                let output = { "data": locations };
+                res.writeHead(200, { 'Content-Type': 'text/html' });
+                res.end(JSON.stringify(output), 'utf8');
+                return;
+            }
+
+            // Check unique film nam
+            else if (parts[0] == 'filmList'){
+                let output = { "data": Array.from(filmNames) };
+                console.log(output);
+                console.log('Boo YAh');
+                res.writeHead(200, { 'Content-Type': 'text/html' });
+                res.end(JSON.stringify(output), 'utf8');
+                return;
+            }
+           
         }
     }
 
@@ -133,3 +189,4 @@ const server = http.createServer((req, res) => {
 const PORT = process.env.PORT || 5000;
 
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
