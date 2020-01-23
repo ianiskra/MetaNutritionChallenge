@@ -6,7 +6,7 @@ Maps JavaScript Reference: https://developers.google.com/maps/documentation/java
 
 document.getElementById("hello") = "Hello World!";
 
-// 1. Create JSON variables holding key-pair values
+// 1. Create JSON variables holding key-pair values on Locations
     // Utilize Values titles and locations from the .csv file
 
 // 2. Variable Array to contain the JSON variables    
