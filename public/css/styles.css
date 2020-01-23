@@ -3,6 +3,15 @@
 	background: #008B8B;
 }
 
+#map-container{
+	text-align: center;
+}
+
+#button{
+	background:#0090BF;
+	border-radius: 15px;
+}
+
 #map{
 	margin: auto;
 	background: #008B8B;
@@ -19,3 +28,5 @@ body{
 h1{
 	text-align: center;
 }
+
+/*------ Classes ------*/

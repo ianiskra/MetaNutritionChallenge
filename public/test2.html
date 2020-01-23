@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Project 4 - Google Maps API</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+
+<body>
+    <h1>My Google Maps Demo</h1>
+
+    <!-- Contain the Map -->
+    <div id="map-container">
+        <!--The div element for the map -->
+        <div id="map"></div>
+
+        <!-- Extra Credit Timer -->
+        <div id="timer">00:00:00</div>
+    </div>
+
+    <div id="question-contain">
+        <h2>Map Quiz Double Click the location on the map</h2>
+        <div id="question-area">
+
+        </div>
+        <button id="restartButton" onclick="restartGame();">Restart</button>
+    </div>
+
+    <div class="clear"></div>
+
+    <script src="./javascript/test2.js">
+
+    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpi3yA1LkZRlU1rH99RGHb5MtQbckWcrM&callback=initMap">
+        </script>
+
+</body>
+
+</html>
