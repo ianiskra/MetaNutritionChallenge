@@ -1,3 +1,4 @@
+<!-- https://peaceful-lake-31059.herokuapp.com/ -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,32 +9,47 @@
 	<link rel="stylesheet" type="text/css" href="./css/styles.css" />
 </head>
 <body>
-	<!-- https://peaceful-lake-31059.herokuapp.com/ -->
+	
 	<header id="head">
-		<p>Insert Nice UI Header Here</p>
+		<div class="head-contain">
+			<!--*** Why is Navigation Color Disappearing if I float Right ***-->
+			<nav>
+				<ul>
+					<li><a href="#">Home</a></li>
+					<li><a href="#">About</a></li>
+					<li><a href="#">Test</a></li>
+				</ul>
+			</nav>
+		</div>
 	</header>
+
+	<!-- Clear Floating Points -->
+	<div class="clear"></div>
 
 	<h1>San Fransisco Movie Locations Map</h1>
 
 	<p id="hello"></p>
 
 	<!-- Contains map and feature -->
-	<main id="map-container">
-		
-		<h2>The Map Goes Here</h2>
-		<input placeholder="Find A Film Location" type="text" id="filmTitle" />
-		<button onclick="doSearch();" id="button">Search</button>
-
-		<!-- Contain the Map App -->
-		<div id="map">
+	<main>
+		<div id="map-container">
+			<h2>The Map Goes Here</h2>
 			
-		</div>
+			<input placeholder="Find A Film Location" type="text" id="filmTitle" />
 
-		<!-- Additional Feature -->
-		<div id="added-feat">
-			
-		</div>
+			<!-- **** Why is this Disappearing/Moving Away after Search is Clicked??? ****-->
+			<button onclick="doSearch();" id="button">Search</button>
 
+			<!-- Contain the Map App -->
+			<div id="map" class="left">
+				
+			</div>
+
+			<!-- Additional Feature -->
+			<div id="print-out" class="left">
+				
+			</div>
+		</div>
 	</main>
 
 	<!-- Contains the Map implementation -->
@@ -44,7 +60,7 @@
 	    * The key parameter will contain your own API key (which is not needed for this tutorial)
 	    * The callback parameter executes the initMap() function
 		-->
-		
+
 	<!-- Google Maps API Key for JavaScript -->
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADDvb3DJSN8Zvdf-XZQ_-HiT8YzlSY6Lc&callback=initMap"></script>
 </body>

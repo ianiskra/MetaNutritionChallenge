@@ -1,68 +1,30 @@
 /* Index.js Serves as the Server and handles routing */
-
 const http = require('http');
 const path = require('path');
 const fs = require('fs');
-
 const csv = require('csv-parser');
 let films = [];
 let filmNames = new Set();
 
-// Read the csv file
+// Read the .csv file
 fs.createReadStream('Film_Locations_in_San_Francisco.csv')
     .pipe(csv())
     .on('data', (row) => {
         // console.log(row);
+
         // Push row to films list
         films.push(row);
 
-        // Will handle discard of repeats
+        // Will handle and discard repeats
         filmNames.add(row['Title']);
-        
     })
     .on('end', () => {
+        // Check to see if CSV file was read
         console.log('CSV file successfully processed');
         console.log(filmNames);
     });
 
-
-
 const server = http.createServer((req, res) => {
-
-    // Test url for index.html
-    // if(req.url === '/'){
-
-    //     // Read html file
-    //     fs.readFile(path.join(__dirname, 'public', 'index.html'), (err,
-    //         content) => {
-
-    //         // Check for error
-    //         if(err) {throw err;}
-
-    //         // Set status & content type
-    //         res.writeHead(200, { 'Content-Type': 'text/html' });
-
-    //         // Sever the HTML page
-    //         res.end(content);
-    //     })
-    // }
-
-    // // Test REST api, serving JSON
-    // if (req.url === '/api/users') {
-
-    // /* Normally fetch data from a database*/
-
-    //     // Hardcode Users in JS Array
-    //     const users = [
-    //         { name: 'Bob Smith', age: 40 },
-    //         { name: 'Jerry Taylor', age: 30 },
-    //     ];
-    //     // 200 Resp with JSON content
-    //     res.writeHead(200, { 'Content-Type': 'application/json' });
-
-    //     // Turn JavaScript object to JSON
-    //     res.end(JSON.stringify(users));
-    // }
 
     // Build File Path
     let filePath = path.join(__dirname, 
@@ -108,12 +70,13 @@ const server = http.createServer((req, res) => {
             // Spliting filmTitle
             let parts = query.split('=');
 
+            // At the VERY 1st space in film tilte
             if(parts[0] == 'filmTitle') {
 
                 let filmTitle = parts[1];
                 console.log(filmTitle);
 
-                // Films withs spaces
+                // Account for Films with spaces
                 filmTitle = filmTitle.split('%20').join(' ');
 
                 // Get list of locations from .csv file
@@ -140,11 +103,14 @@ const server = http.createServer((req, res) => {
                 return;
             }
 
-            // Check unique film nam
+            // Check unique Film Name
             else if (parts[0] == 'filmList'){
                 let output = { "data": Array.from(filmNames) };
                 console.log(output);
-                console.log('Boo YAh');
+                
+                // console.log('Boo YAh');
+
+                // Sucessful client request to server
                 res.writeHead(200, { 'Content-Type': 'text/html' });
                 res.end(JSON.stringify(output), 'utf8');
                 return;
@@ -153,17 +119,21 @@ const server = http.createServer((req, res) => {
         }
     }
 
-
     // Read File - Delivers files to Front End based on URL requests
     fs.readFile(filePath, (err, content) => {
-        // Check for Error
+        // Check for Errors
         if(err){
-            // Error Code ENOENT - Not Found
+
+            // Error Code ENOENT - Directory Not Found
             if(err.code == 'ENOENT'){
-                // Page Not Found
+
+                // Page Not Found - Produce custom error page
                 fs.readFile(path.join(__dirname, 'public', '404.html'), (err, content) => {
-                    // 200 response
+
+                    // Sucessful client request to server
                     res.writeHead(200, { 'Content-Type': 'text/html' });
+
+                    // Loads Content
                     res.end(content, 'utf8');
                 })
             }
@@ -172,6 +142,8 @@ const server = http.createServer((req, res) => {
             else{
                 // Some Server Error
                 res.writeHead(500);
+
+                // Loads Content
                 res.end(`Server Error: ${err.code}`);
             }
         }
@@ -179,14 +151,14 @@ const server = http.createServer((req, res) => {
         else{
             // Successful Response
             res.writeHead(200, { 'Content-Type': contentType });
+
             // Loads Content
             res.end(content, 'utf8');
         }
     });
 });
 
-// Port variable
+// Default value of Port or default to 5000
 const PORT = process.env.PORT || 5000;
 
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-

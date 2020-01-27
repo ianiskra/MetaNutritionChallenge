@@ -1,7 +1,7 @@
 /*------ IDs ------*/
-#head{
+/* #head{
 	background: #008B8B;
-}
+} */
 
 #map-container{
 	text-align: center;
@@ -23,6 +23,43 @@
 body{
 	background: #333;
 	color: #FFF;
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+header{
+	background: #008B8B;
+}
+
+/* Target the Navigation */
+nav{
+	float: right;
+}
+
+nav ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+nav li{
+	display: inline-block;
+	margin-left: 70px;
+	padding-top: 25px;
+
+	/* In case I have a Before state in navigation*/
+	position: relative;
+}
+
+nav a{
+	color: #444;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 14px;
+}
+
+nav a:hover{
+	color: #000;
 }
 
 h1{
@@ -30,3 +67,19 @@ h1{
 }
 
 /*------ Classes ------*/
+.head-contain{
+	width: 80%;
+	margin: 0 auto;
+}
+
+.left{
+	float: left;
+}
+
+.right{
+	float: right;
+}
+
+.clear{
+	clear: both;
+}
