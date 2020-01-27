@@ -1,8 +1,4 @@
 /*------ IDs ------*/
-/* #head{
-	background: #008B8B;
-} */
-
 #map-container{
 	text-align: center;
 }
@@ -28,21 +24,22 @@ body{
 }
 
 header{
-	background: #008B8B;
+	background-color: #0090BF;
 }
 
-/* Target the Navigation */
-nav{
+/* Target Navigation Header */
+header nav{
 	float: right;
 }
 
-nav ul{
+header nav ul{
 	margin: 0;
 	padding: 0;
 	list-style: none;
+	float: right;
 }
 
-nav li{
+header nav li{
 	display: inline-block;
 	margin-left: 70px;
 	padding-top: 25px;
@@ -51,14 +48,14 @@ nav li{
 	position: relative;
 }
 
-nav a{
-	color: #444;
+header nav a{
 	text-decoration: none;
 	text-transform: uppercase;
 	font-size: 14px;
+	color: #FFF;
 }
 
-nav a:hover{
+header nav a:hover{
 	color: #000;
 }
 

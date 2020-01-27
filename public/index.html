@@ -10,20 +10,19 @@
 </head>
 <body>
 	
-	<header id="head">
+	<header>
 		<div class="head-contain">
-			<!--*** Why is Navigation Color Disappearing if I float Right ***-->
 			<nav>
 				<ul>
-					<li><a href="#">Home</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Test</a></li>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="about.html">About</a></li>
+					<li><a href="404.html">404 Error</a></li>
 				</ul>
 			</nav>
 		</div>
 	</header>
 
-	<!-- Clear Floating Points -->
+	<!-- Clear Floating Elements -->
 	<div class="clear"></div>
 
 	<h1>San Fransisco Movie Locations Map</h1>
@@ -36,9 +35,11 @@
 			<h2>The Map Goes Here</h2>
 			
 			<input placeholder="Find A Film Location" type="text" id="filmTitle" />
-
-			<!-- **** Why is this Disappearing/Moving Away after Search is Clicked??? ****-->
 			<button onclick="doSearch();" id="button">Search</button>
+
+			<!-- Temporarily allows results print-out nicely to be on the right side of the map -->
+			<br>
+			<br>
 
 			<!-- Contain the Map App -->
 			<div id="map" class="left">
@@ -47,6 +48,7 @@
 
 			<!-- Additional Feature -->
 			<div id="print-out" class="left">
+				
 				
 			</div>
 		</div>

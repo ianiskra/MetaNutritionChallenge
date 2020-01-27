@@ -5,6 +5,7 @@
  * Maps JavaScript Reference: https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions.zoom
  * Autocomplete for Addresses and Search Terms: https://developers.google.com/maps/documentation/javascript/places-autocomplete
  * Geoservices: https://console.cloud.google.com/apis/library/geocoding-backend.googleapis.com?q=geocoding&id=42fea2de-420b-4bd7-bd89-225be3b8b7b0&project=meta-nutrition-challenge&folder&organizationId
+ * Request & Response Geocoding API: https://developers.google.com/maps/documentation/geocoding/start
  * 
 */
 
@@ -12,14 +13,6 @@
 let films = [];
 let myMap;
 
-// 1. Create JSON variables holding key-pair values on Locations
-    // Utilize Values titles and locations from the .csv file
-    // Will need to invoke the csv-parser, convert CSV into JSON 
-
-    // Process strings of text
-    // let items = data.split("");
-
-    
 // API Callback Function
 function initMap() {
 
@@ -29,16 +22,15 @@ function initMap() {
     // Map centered at SF
     myMap = new google.maps.Map(
         
-        // 4. Use zoom property so map is centered at SF
+        // center map at SF
         document.getElementById('map'),
         { zoom: 13, center: sanFran});
-
-        // 
-
 }
 
 // Perfomrs Search Requests of Movie Locations
 function doSearch() {
+
+    // User Movie Search
     let search = document.getElementById('filmTitle').value;
     console.log(search);
 
@@ -65,37 +57,46 @@ function doSearch() {
                 // Returns Bulletpoint Results of location
                 filmOutput += '<li>' + location + '</li>';
 
-                // Put Pin on Map at Location
+                // This allows us for Marker on Map at Location
                 var subURL = 'https://maps.googleapis.com/maps/api/geocode/json?address='+encodeURIComponent(location)+',+San+Francisco,+CA,+94108&key=AIzaSyADDvb3DJSN8Zvdf-XZQ_-HiT8YzlSY6Lc';
+
+                // Test subUrl in JSON format
                 console.log(subURL);
+
+                // For Location Request
                 var subxmlhttp = new XMLHttpRequest();
 
-                // API Location Lat & Long Lookup
+                // Event handler for readystate of location request
                 subxmlhttp.onreadystatechange = function() {
 
+                    // Check status of XMLHttpRequest
                     if(this.readyState == 4 && this.status == 200) {
                         var responseObject = JSON.parse(this.responseText);
-                        var lat = responseObject['results'][0]['geometry']['location']['lat'];
-                        var lng = responseObject['results'][0]['geometry']['location']['lng'];
 
-                        var myLatLng = { lat: lat, lng: lng };
+                        // JSON targeting struc: results, index #, geometry, location, lat/long
+                        var lati = responseObject['results'][0]['geometry']['location']['lat'];
+                        var long = responseObject['results'][0]['geometry']['location']['lng'];
 
-                        // Produce Marker
+                        // Retrive the lat & long of film location
+                        var myLatLng = { lat: lati, lng: long };
+
+                        // Produce Marker on Map
                         console.log(myMap);
+
+                        // Finally Allows Marker on Map!
                         var marker = new google.maps.Marker({
                             position: myLatLng,
                             map: myMap,
                             title: location
                         });
 
-
-                        // Produce Pin
+                        // Produce Pin Test
                         console.log(this.responseText);
-
                         
                     }
                 }
 
+                // Implement Request & Response
                 subxmlhttp.open("GET", subURL, true);
                 subxmlhttp.send();
             }
@@ -106,6 +107,8 @@ function doSearch() {
             console.log(filmOutput);
         }
     };
+
+    // Implement Request & Response
     xmlhttp.open("GET", url, true);
     xmlhttp.send();
 
@@ -113,6 +116,7 @@ function doSearch() {
 
 // List of Unique Films is Stored
 function getFilms() {
+
     // Retrive data from server
     var xmlhttp = new XMLHttpRequest();
     var url = "find.data?filmList";
@@ -128,6 +132,8 @@ function getFilms() {
             films = myArr;
         }
     };
+
+    // Implement Request & Response
     xmlhttp.open("GET", url, true);
     xmlhttp.send();
 
@@ -136,7 +142,7 @@ function getFilms() {
 // Function call
 getFilms();
 
-// Track the input box typing
+// Track user input box typing
 document.getElementById('filmTitle').onkeyup = function(e) {
     // Test Event e
     console.log(e);
