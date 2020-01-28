@@ -1,4 +1,5 @@
-/* Index.js Serves as the Server and handles routing */
+/* Index.js Serves as the Server and handles routing 
+Considered the backend*/
 const http = require('http');
 const path = require('path');
 const fs = require('fs');
@@ -73,7 +74,8 @@ const server = http.createServer((req, res) => {
             // At the VERY 1st space in film tilte
             if(parts[0] == 'filmTitle') {
 
-                let filmTitle = parts[1];
+                // User input for search
+                let filmTitle = parts[1].toLowerCase();
                 console.log(filmTitle);
 
                 // Account for Films with spaces
@@ -81,13 +83,16 @@ const server = http.createServer((req, res) => {
 
                 // Get list of locations from .csv file
                 let locations = [];
-                
+                console.log("------");
+                console.log(films.length);
+
                 for(let i = 0; i < films.length; i++){
 
                     let film = films[i];
+                    console.log(film['Title'] + ' ' + filmTitle);
 
                     // title of film match search query
-                    if(film['Title'] == filmTitle){
+                    if (film['Title'].toLowerCase().includes(filmTitle) ){
 
                         // add to it's film location
                         locations.push(film['Locations']);

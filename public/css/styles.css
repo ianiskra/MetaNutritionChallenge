@@ -1,6 +1,8 @@
 /*------ IDs ------*/
 #map-container{
 	text-align: center;
+	display: inline-block;
+	vertical-align: top;
 }
 
 #button{
@@ -12,7 +14,31 @@
 	margin: auto;
 	background: #008B8B;
 	height: 1000px;
-  	width: 1200px;
+	  width: 1200px;
+	  display: inline-block;
+	  vertical-align: top;
+}
+
+#print-out{
+	display: inline-block;
+	width: 400px;
+}
+
+#search-container{
+	display: inline-block;
+	vertical-align: top;
+}
+
+
+#search-container *{
+	vertical-align: top;
+	padding-left: 10px;
+	
+}
+
+#matches{
+	border: 2px solid #0090BF;
+	width: 200px;
 }
 
 /*------ Tags ------*/

@@ -8,10 +8,20 @@
  * Request & Response Geocoding API: https://developers.google.com/maps/documentation/geocoding/start
  * 
 */
-
+/* Embedded in the browswer itself */
 // Global variables 
 let films = [];
 let myMap;
+let markers = []; // Hold markers for clearing
+
+function clearMarkers() {
+    
+    for(let i = 0; i < markers.length; i++){
+        // Clears
+        markers[i].setMap(null);
+    }
+    markers = [];
+}
 
 // API Callback Function
 function initMap() {
@@ -27,8 +37,13 @@ function initMap() {
         { zoom: 13, center: sanFran});
 }
 
+
+
 // Perfomrs Search Requests of Movie Locations
 function doSearch() {
+    
+    // Clear existing
+    clearMarkers();
 
     // User Movie Search
     let search = document.getElementById('filmTitle').value;
@@ -93,6 +108,9 @@ function doSearch() {
                         // Produce Pin Test
                         console.log(this.responseText);
                         
+                        // add to end
+                        markers.push(marker);
+
                     }
                 }
 
@@ -139,6 +157,11 @@ function getFilms() {
 
 }
 
+// Autofiller
+function autoFill(name){
+    document.getElementById('filmTitle').value = name;
+}
+
 // Function call
 getFilms();
 
@@ -146,8 +169,24 @@ getFilms();
 document.getElementById('filmTitle').onkeyup = function(e) {
     // Test Event e
     console.log(e);
+
+    // Get contents of film title input
+    let input = document.getElementById('filmTitle').value.toLowerCase();
+    console.log(input);
+
+    // Get matches
+    document.getElementById('matches').innerHTML = '';
+
+    // Loop through all existing stored film titles for match
+    for(let i = 0; i < films.length; i++){
+
+        // 
+        if (films[i].toLowerCase().includes(input)){
+            
+            // Getting name of film, place into autofill onclick event, need to improve way vari are input in string
+            document.getElementById('matches').innerHTML += "<span onclick='autoFill(\"" + films[i] +"\");'>" + films[i] + "</span><br>";
+        }
+    }
 };
 
-/*
-autocomplete 
-*/
+// Autocomplete
