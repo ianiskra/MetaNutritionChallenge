@@ -83,9 +83,9 @@ const server = http.createServer((req, res) => {
 
                 // Get list of locations from .csv file
                 let locations = [];
-                console.log("------");
                 console.log(films.length);
 
+                // Loop through the films for title
                 for(let i = 0; i < films.length; i++){
 
                     let film = films[i];
@@ -120,12 +120,12 @@ const server = http.createServer((req, res) => {
                 res.end(JSON.stringify(output), 'utf8');
                 return;
             }
-           
         }
     }
 
     // Read File - Delivers files to Front End based on URL requests
     fs.readFile(filePath, (err, content) => {
+        
         // Check for Errors
         if(err){
 

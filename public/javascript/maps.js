@@ -8,18 +8,23 @@
  * Request & Response Geocoding API: https://developers.google.com/maps/documentation/geocoding/start
  * 
 */
-/* Embedded in the browswer itself */
+/* maps.js is embedded in the browswer itself for the front-end purposes */
+
 // Global variables 
 let films = [];
 let myMap;
-let markers = []; // Hold markers for clearing
+let markers = []; 
 
+// Remove markers upon new search
 function clearMarkers() {
     
+    // Loop through the existing markers
     for(let i = 0; i < markers.length; i++){
-        // Clears
+        
+        // remove markers
         markers[i].setMap(null);
     }
+    // Clears
     markers = [];
 }
 
@@ -37,12 +42,10 @@ function initMap() {
         { zoom: 13, center: sanFran});
 }
 
-
-
 // Perfomrs Search Requests of Movie Locations
 function doSearch() {
     
-    // Clear existing
+    // Will clear existing results if any
     clearMarkers();
 
     // User Movie Search
@@ -110,7 +113,6 @@ function doSearch() {
                         
                         // add to end
                         markers.push(marker);
-
                     }
                 }
 
@@ -129,7 +131,6 @@ function doSearch() {
     // Implement Request & Response
     xmlhttp.open("GET", url, true);
     xmlhttp.send();
-
 }
 
 // List of Unique Films is Stored
@@ -165,7 +166,7 @@ function autoFill(name){
 // Function call
 getFilms();
 
-// Track user input box typing
+// Track user input box typing to fulfill autocomplete
 document.getElementById('filmTitle').onkeyup = function(e) {
     // Test Event e
     console.log(e);
@@ -180,13 +181,11 @@ document.getElementById('filmTitle').onkeyup = function(e) {
     // Loop through all existing stored film titles for match
     for(let i = 0; i < films.length; i++){
 
-        // 
+        // checks input even at lowercasing
         if (films[i].toLowerCase().includes(input)){
             
-            // Getting name of film, place into autofill onclick event, need to improve way vari are input in string
+            // Getting name of film, place into autofill onclick event, need to improve way var are inputted into string
             document.getElementById('matches').innerHTML += "<span onclick='autoFill(\"" + films[i] +"\");'>" + films[i] + "</span><br>";
         }
     }
 };
-
-// Autocomplete
