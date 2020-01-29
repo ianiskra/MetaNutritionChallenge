@@ -1,0 +1,63 @@
+<!-- https://peaceful-lake-31059.herokuapp.com/ -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Homepage - Code Challenge MetaNutrition</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<link rel="stylesheet" type="text/css" href="./css/styles.css" />
+</head>
+<body>
+	
+	<header>
+		<div class="head-contain">
+			<nav>
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="about.html">About</a></li>
+					<li><a href="404.html">404 Error</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<h1>San Fransisco Movie Locations Map</h1>
+
+	<!-- Contains map and feature -->
+	<main>
+		<h2>The Map Goes Here</h2>
+		
+		<div id="map-container">			
+			<!-- Temporarily allows results print-out nicely to be on the right side of the map -->
+			<br>
+			<br>
+
+			<!-- Contain the Map App -->
+			<div id="map"></div>
+
+			<!-- Print Out of Locations -->
+			<div id="print-out"></div>
+		</div>
+
+		<div id="search-container">
+			<input placeholder="Find A Film Location" type="text" id="filmTitle" />
+			<button onclick="doSearch();" id="button">Search</button>
+			<div id="matches"></div>
+		</div>
+		
+	</main>
+
+	<!-- Contains the Map implementation -->
+	<script src="./javascript/maps.js"></script>
+	
+	<!--Load the API from the specified URL
+	    * The async attribute allows the browser to render the page while the API loads
+	    * The key parameter will contain your own API key (which is not needed for this tutorial)
+	    * The callback parameter executes the initMap() function
+		-->
+
+	<!-- Google Maps API Key for JavaScript -->
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADDvb3DJSN8Zvdf-XZQ_-HiT8YzlSY6Lc&callback=initMap"></script>
+</body>
+</html>
